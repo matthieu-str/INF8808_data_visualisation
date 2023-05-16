@@ -44,7 +44,11 @@ def draw(fig, data, mode):
             fig: The figure comprising the drawn bar chart
     '''
     fig = go.Figure(fig)  # conversion back to Graph Object
-    # TODO : Update the figure's data according to the selected mode
+
+    for player, df in data.groupby(by='Player'):
+        fig.add_trace(go.Bar(x=df['Act'], y=df[MODE_TO_COLUMN[mode]], name=player))
+    fig.update_layout(barmode='stack')
+
     return fig
 
 
@@ -58,4 +62,11 @@ def update_y_axis(fig, mode):
         Returns: 
             The updated figure
     '''
-    # TODO : Update the y axis title according to the current mode
+    fig = go.Figure(fig)
+
+    if mode == MODES["count"]:
+        fig.update_layout(yaxis_title="Lines (Count)")
+    elif mode == MODES["percent"]:
+        fig.update_layout(yaxis_title="Lines (%)")
+
+    return fig

@@ -26,7 +26,8 @@ def init_figure():
     fig.update_layout(
         template=pio.templates['simple_white'],
         dragmode=False,
-        barmode='relative'
+        barmode='relative',
+        title=dict(text="Lines per act")
     )
 
     return fig
@@ -45,6 +46,7 @@ def draw(fig, data, mode):
     '''
     fig = go.Figure(fig)  # conversion back to Graph Object
 
+    fig.data = [] # removes all previous traces to avoid plots to stack when changing the mode
     for player, df in data.groupby(by='Player'):
         fig.add_trace(go.Bar(x=df['Act'], y=df[MODE_TO_COLUMN[mode]], name=player))
     fig.update_layout(barmode='stack')

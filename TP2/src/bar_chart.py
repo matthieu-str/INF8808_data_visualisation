@@ -24,13 +24,11 @@ def init_figure():
     # TODO : Update the template to include our new theme and set the title
 
     fig.update_layout(
-        template=pio.templates['simple_white'],
+        template=pio.templates['simple_white+new_theme'], # simple_white template and new_theme on top of it
         dragmode=False,
         barmode='relative',
-        title=dict(text="Lines per act")
+        title=dict(text="Lines per act") # title of the graph
     )
-
-    fig.update_layout(template=pio.templates['new_theme'])
 
     return fig
 

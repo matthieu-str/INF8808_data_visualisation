@@ -21,8 +21,6 @@ def init_figure():
     '''
     fig = go.Figure()
 
-    # TODO : Update the template to include our new theme and set the title
-
     fig.update_layout(
         template=pio.templates['simple_white+new_theme'], # simple_white template and new_theme on top of it
         dragmode=False,

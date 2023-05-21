@@ -3,7 +3,6 @@
 '''
 from modes import MODES
 
-
 def get_hover_template(name, mode):
     '''
         Sets the template for the hover tooltips.
@@ -27,11 +26,11 @@ def get_hover_template(name, mode):
     '''
     # TODO: Generate and return the hover template
 
-    if mode == 'Count':
+    if mode == MODES['count']:
         txt = f'{name}<br>'+\
               '<br>%{y} lines <extra></extra>'
 
-    elif mode == 'Percent':
+    elif mode == MODES['percent']:
         txt = f'{name}<br>'+\
               '<br>%{y:.2f}% of lines <extra></extra>'
 

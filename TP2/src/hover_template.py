@@ -15,7 +15,7 @@ def get_hover_template(name, mode):
                 - Font color: Black
             * The number of lines spoken by the player, formatted as:
                 - The number of lines if the mode is 'Count ("X lines").
-                - The percent of lines fomatted with two
+                - The percent of lines formatted with two
                     decimal points followed by a '%' symbol
                     if the mode is 'Percent' ("Y% of lines").
 
@@ -23,8 +23,16 @@ def get_hover_template(name, mode):
             name: The hovered element's player's name
             mode: The current display mode
         Returns:
-            The hover template with the elements descibed above
+            The hover template with the elements described above
     '''
-    # TODO: Generate and return the over template
+    # TODO: Generate and return the hover template
 
-    return ''
+    if mode == 'Count':
+        txt = f'{name}<br>'+\
+              '<br>%{y} lines <extra></extra>'
+
+    elif mode == 'Percent':
+        txt = f'{name}<br>'+\
+              '<br>%{y:.2f}% of lines <extra></extra>'
+
+    return txt

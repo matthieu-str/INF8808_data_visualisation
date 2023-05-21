@@ -30,6 +30,8 @@ def init_figure():
         title=dict(text="Lines per act")
     )
 
+    fig.update_layout(template=pio.templates['new_theme'])
+
     return fig
 
 

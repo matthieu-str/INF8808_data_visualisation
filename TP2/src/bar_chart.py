@@ -48,7 +48,10 @@ def draw(fig, data, mode):
 
     fig.data = [] # removes all previous traces to avoid plots to stack when changing the mode
     for player, df in data.groupby(by='Player'):
-        fig.add_trace(go.Bar(x=df['Act'], y=df[MODE_TO_COLUMN[mode]], name=player))
+        fig.add_trace(go.Bar(x=df['Act'],
+                             y=df[MODE_TO_COLUMN[mode]],
+                             name=player,
+                             hovertemplate=get_hover_template(name=player, mode=mode)))
     fig.update_layout(barmode='stack')
 
     return fig

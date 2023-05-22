@@ -50,10 +50,12 @@ def draw(fig, data, mode):
                              y=df[MODE_TO_COLUMN[mode]],
                              name=player,
                              hovertemplate=get_hover_template(name=player, mode=mode)))
-    fig.update_layout(barmode='stack')
-
-    for idx in range(len(fig.data)): # change x ticks names from i to Act i
-        fig.data[idx].x = ['Act 1', 'Act 2', 'Act 3', 'Act 4', 'Act 5']
+    fig.update_layout(barmode='stack',
+                      xaxis=dict(
+                          tickmode='array',
+                          tickvals=[1, 2, 3, 4, 5],
+                          ticktext=['Act 1', 'Act 2', 'Act 3', 'Act 4', 'Act 5']
+                      ))
 
     return fig
 

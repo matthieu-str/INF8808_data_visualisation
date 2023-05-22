@@ -24,10 +24,8 @@ def get_hover_template(name, mode):
         Returns:
             The hover template with the elements described above
     '''
-    # TODO: Generate and return the hover template
 
     font_style = {'family': 'Grenze Gotish', 'size': 24, 'color': 'Black'}
-
 
     if mode == MODES['count']:
         txt = f'<span style="font-family: {font_style["family"]}; font-size: {font_style["size"]}px; color: {font_style["color"]}">{name}</span><br>'+\

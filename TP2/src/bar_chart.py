@@ -44,12 +44,14 @@ def draw(fig, data, mode):
     '''
     fig = go.Figure(fig)  # conversion back to Graph Object
 
-    fig.data = [] # removes all previous traces to avoid plots to stack when changing the mode
+    fig.data = [] # clear the plot to avoid charts to stack when changing the mode
     for player, df in data.groupby(by='Player'):
+        # Bar chart
         fig.add_trace(go.Bar(x=df['Act'],
                              y=df[MODE_TO_COLUMN[mode]],
                              name=player,
                              hovertemplate=get_hover_template(name=player, mode=mode)))
+    # Change the bar mode to stacked bar and change the name of the x axis ticks
     fig.update_layout(barmode='stack',
                       xaxis=dict(
                           tickmode='array',

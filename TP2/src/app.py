@@ -119,16 +119,13 @@ def radio_updated(mode, figure):
             new_fig: The figure to display after the change of radio input
             mode: The new mode
     '''
-    # TODO : Update the figure's data and y axis, as well as the informational
-    # text indicating the mode
+
     new_fig = figure
 
     new_fig = bar_chart.draw(new_fig, data, mode)
     new_fig = bar_chart.update_y_axis(new_fig, mode)
-    # add text indicating the mode
 
-    return new_fig, ''
-
+    return new_fig, mode
 
 data = prep_data()
 

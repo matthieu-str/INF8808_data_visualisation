@@ -21,13 +21,11 @@ def init_figure():
     '''
     fig = go.Figure()
 
-    # TODO : Update the template to include our new theme and set the title
-
     fig.update_layout(
-        template=pio.templates['simple_white'],
+        template=pio.templates['simple_white+new_theme'], # simple_white template and new_theme on top of it
         dragmode=False,
         barmode='relative',
-        title=dict(text="Lines per act")
+        title=dict(text="Lines per act") # title of the graph
     )
 
     return fig
@@ -48,8 +46,14 @@ def draw(fig, data, mode):
 
     fig.data = [] # removes all previous traces to avoid plots to stack when changing the mode
     for player, df in data.groupby(by='Player'):
-        fig.add_trace(go.Bar(x=df['Act'], y=df[MODE_TO_COLUMN[mode]], name=player))
+        fig.add_trace(go.Bar(x=df['Act'],
+                             y=df[MODE_TO_COLUMN[mode]],
+                             name=player,
+                             hovertemplate=get_hover_template(name=player, mode=mode)))
     fig.update_layout(barmode='stack')
+
+    for idx in range(len(fig.data)): # change x ticks names from i to Act i
+        fig.data[idx].x = ['Act 1', 'Act 2', 'Act 3', 'Act 4', 'Act 5']
 
     return fig
 

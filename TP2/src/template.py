@@ -45,4 +45,17 @@ def create_template():
         the THEME dictionary.
 
     '''
-    # TODO : Define a theme as defined above
+
+    pio.templates['new_theme'] = go.layout.Template(
+        layout=go.Layout(
+            font=dict(color=THEME["font_color"],
+                      family=THEME["font_family"]),
+            hoverlabel=dict(font_size=THEME["label_font_size"],
+                            font_color=THEME["font_color"],
+                            bgcolor=THEME["label_background_color"]),
+            hovermode='closest',
+            plot_bgcolor=THEME["background_color"],
+            paper_bgcolor=THEME["background_color"]
+        ),
+        data_bar=[go.Bar(marker_color=THEME["bar_colors"][i]) for i in range(len(THEME["bar_colors"]))]
+    )

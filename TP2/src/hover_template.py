@@ -26,12 +26,15 @@ def get_hover_template(name, mode):
     '''
     # TODO: Generate and return the hover template
 
+    font_style = {'family': 'Grenze Gotish', 'size': 24, 'color': 'Black'}
+
+
     if mode == MODES['count']:
-        txt = f'{name}<br>'+\
+        txt = f'<span style="font-family: {font_style["family"]}; font-size: {font_style["size"]}px; color: {font_style["color"]}">{name}</span><br>'+\
               '<br>%{y} lines <extra></extra>'
 
     elif mode == MODES['percent']:
-        txt = f'{name}<br>'+\
+        txt = f'<span style="font-family: {font_style["family"]}; font-size: {font_style["size"]}px; color: {font_style["color"]}">{name}</span><br>'+\
               '<br>%{y:.2f}% of lines <extra></extra>'
 
     return txt

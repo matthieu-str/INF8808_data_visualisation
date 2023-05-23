@@ -14,6 +14,8 @@ def convert_dates(dataframe):
             The processed dataframe with datetime-formatted dates.
     '''
     # TODO : Convert dates
+    dataframe.Date_Plantation = pd.to_datetime(dataframe.Date_Plantation)
+
     return dataframe
 
 
@@ -30,6 +32,9 @@ def filter_years(dataframe, start, end):
             The dataframe filtered by date.
     '''
     # TODO : Filter by dates
+    dataframe = dataframe[(dataframe.Date_Plantation >= f"{start}-01-01") &
+                          (dataframe.Date_Plantation <= f"{end}-12-31")]
+
     return dataframe
 
 

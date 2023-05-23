@@ -32,8 +32,8 @@ def filter_years(dataframe, start, end):
             The dataframe filtered by date.
     '''
     # TODO : Filter by dates
-    dataframe = dataframe[(dataframe.Date_Plantation >= f"{start}-01-01") &
-                          (dataframe.Date_Plantation <= f"{end}-12-31")]
+    dataframe = dataframe[(dataframe.Date_Plantation.dt.year >= start) &
+                          (dataframe.Date_Plantation.dt.year <= end)]
 
     return dataframe
 
@@ -52,7 +52,16 @@ def summarize_yearly_counts(dataframe):
             trees for each neighborhood each year.
     '''
     # TODO : Summarize df
-    return None
+    # counts the number of trees per year and neighborhood name
+    dataframe = dataframe.groupby(by=[dataframe.Date_Plantation.dt.year, "Arrond_Nom"]).count()
+    # drops columns that are not useful
+    dataframe.drop(columns=["Date_Plantation", "Longitude", "Latitude"], inplace=True)
+    # rename the counting column to "Counts"
+    dataframe.rename(columns={"Arrond": "Counts"}, inplace=True)
+    # reset index
+    dataframe.reset_index(drop=False, inplace=True)
+
+    return dataframe
 
 
 def restructure_df(yearly_df):
@@ -74,7 +83,13 @@ def restructure_df(yearly_df):
             The restructured dataframe
     '''
     # TODO : Restructure df and fill empty cells with 0
-    return None
+    piv = pd.pivot_table(yearly_df,
+                         values="Counts",
+                         index=["Arrond_Nom"],
+                         columns=["Date_Plantation"],
+                         fill_value=0) # fills empty cells with 0
+
+    return piv
 
 
 def get_daily_info(dataframe, arrond, year):
@@ -92,4 +107,10 @@ def get_daily_info(dataframe, arrond, year):
             neighborhood and year.
     '''
     # TODO : Get daily tree count data and return
-    return None
+    dataframe = dataframe[(dataframe.Date_Plantation.dt.year == year) &
+                          (dataframe.Arrond_Nom == arrond)].groupby(pd.Grouper(key="Date_Plantation")).count()
+    dataframe.drop(columns=["Arrond_Nom", "Longitude", "Latitude"], inplace=True)
+    dataframe.rename(columns={"Arrond": "Counts"}, inplace=True)
+    dataframe.reset_index(drop=False, inplace=True)
+
+    return dataframe

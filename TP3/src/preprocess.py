@@ -111,9 +111,11 @@ def get_daily_info(dataframe, arrond, year):
                           (dataframe.Arrond_Nom == arrond)].groupby(pd.Grouper(key="Date_Plantation")).count()
     dataframe.drop(columns=["Arrond_Nom", "Longitude", "Latitude"], inplace=True)
     dataframe.index = pd.DatetimeIndex(dataframe.index)
-    idx = pd.date_range(f'01-01-{year}', f'12-31-{year}')
+    start_date = dataframe.index.min()
+    end_date = dataframe.index.max()
+    idx = pd.date_range(f'{start_date}', f'{end_date}')
     dataframe = dataframe.reindex(idx, fill_value=0)
-    dataframe.rename(columns={"index": "Date_Plantation", "Arrond": "Counts"}, inplace=True)
     dataframe.reset_index(drop=False, inplace=True)
+    dataframe.rename(columns={"index": "Date_Plantation", "Arrond": "Counts"}, inplace=True)
 
     return dataframe

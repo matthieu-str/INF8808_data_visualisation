@@ -51,28 +51,17 @@ def add_rectangle_shape(fig):
     '''
     # TODO : Draw the rectangle
     
-    fig = px.line(line_data, x='Date_Plantation', y='Counts')
-    
-    fig.update_traces(
-        hovertemplate=hover_template.get_linechart_hover_template(),
+    fig.add_shape(
+        type='rect',
+        xref='paper',
+        yref='paper',
+        x0=0,
+        y0=0.25,
+        x1=1,
+        y1=0.75,
+        fillcolor=THEME['pale_color'],
         line=dict(
-            color=THEME['line_chart_color'],
-            width=2
-        ),
-        mode='lines+markers')
-    
-    fig.update_layout(
-        title=f'Trees Planted in {arrond} - {year}',
-        xaxis=dict(
-            tickformat='%d-%b',
-            title='Date'
-        ),
-        yaxis=dict(
-            title='Trees'
-        ),
-        hovermode='closest')
-    
-    fig.update_layout(dragmode=False)
+            width=0))
     return fig
 
 

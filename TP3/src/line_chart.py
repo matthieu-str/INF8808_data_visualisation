@@ -18,7 +18,25 @@ def get_empty_figure():
 
     # TODO : Construct the empty figure to display. Make sure to 
     # set dragmode=False in the layout.
-    return None
+    
+    fig = px.scatter()
+
+    fig.update_layout(
+        annotations=[
+            dict(
+                x=0.5,
+                y=0.5,
+                text='No data to display. Select a cell in the heatmap for more information.',
+                showarrow=False,
+                font=dict(
+                    family=THEME['font_family'],
+                    size=THEME['label_font_size'],
+                    color=THEME['dark_color'] ) )])
+    
+    fig.update_xaxes(visible=False, showticklabels=False)
+    fig.update_yaxes(visible=False, showticklabels=False)
+    fig.update_layout(dragmode=False)
+    return fig
 
 
 def add_rectangle_shape(fig):
@@ -32,7 +50,30 @@ def add_rectangle_shape(fig):
         0.25% to 0.75% the height of the figure.
     '''
     # TODO : Draw the rectangle
-    return None
+    
+    fig = px.line(line_data, x='Date_Plantation', y='Counts')
+    
+    fig.update_traces(
+        hovertemplate=hover_template.get_linechart_hover_template(),
+        line=dict(
+            color=THEME['line_chart_color'],
+            width=2
+        ),
+        mode='lines+markers')
+    
+    fig.update_layout(
+        title=f'Trees Planted in {arrond} - {year}',
+        xaxis=dict(
+            tickformat='%d-%b',
+            title='Date'
+        ),
+        yaxis=dict(
+            title='Trees'
+        ),
+        hovermode='closest')
+    
+    fig.update_layout(dragmode=False)
+    return fig
 
 
 def get_figure(line_data, arrond, year):

@@ -48,7 +48,9 @@ def create_custom_theme():
         degrees to the right.
     '''
     # TODO : Generate template described above
-    
+
+    template = go.layout.Template()
+
     # Set font family and color
     template.layout.font.family = THEME['font_family']
     template.layout.font.color = THEME['dark_color']
@@ -68,16 +70,13 @@ def create_custom_theme():
     template.layout.hovermode = 'closest'
 
     # Set line chart line color
-    template.data.line.color = THEME['line_chart_color']
+    #template.data.line.color = THEME['line_chart_color']
 
     # Set heatmap color scale
-    template.data.heatmap.colorscale = THEME['colorscale']
+    # template.data.heatmap = [go.Heatmap(colorscale = THEME['colorscale'])]
 
     # Set x-axis tick angle
-    #template.layout.xaxis.tickangle = -45
-
-    # Set x-axis tickmode
-    #template.layout.xaxis.tickmode = 'linear'
+    template.layout.xaxis.tickangle = -45
 
     # Add the template to pio's templates
     pio.templates['custom_template'] = template

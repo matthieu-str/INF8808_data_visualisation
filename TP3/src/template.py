@@ -48,6 +48,39 @@ def create_custom_theme():
         degrees to the right.
     '''
     # TODO : Generate template described above
+    
+    # Set font family and color
+    template.layout.font.family = THEME['font_family']
+    template.layout.font.color = THEME['dark_color']
+
+    # Set background color
+    template.layout.plot_bgcolor = THEME['background_color']
+    template.layout.paper_bgcolor = THEME['background_color']
+
+    # Set hover label background color and font size
+    template.layout.hoverlabel.bgcolor = THEME['label_background_color']
+    template.layout.hoverlabel.font.size = THEME['label_font_size']
+
+    # Set hover label font color
+    template.layout.hoverlabel.font.color = THEME['dark_color']
+
+    # Set hover mode to 'closest'
+    template.layout.hovermode = 'closest'
+
+    # Set line chart line color
+    template.data.line.color = THEME['line_chart_color']
+
+    # Set heatmap color scale
+    template.data.heatmap.colorscale = THEME['colorscale']
+
+    # Set x-axis tick angle
+    #template.layout.xaxis.tickangle = 90
+
+    # Set x-axis tickmode
+    #template.layout.xaxis.tickmode = 'linear'
+
+    # Add the template to pio's templates
+    pio.templates['custom_template'] = template
 
 
 def set_default_theme():
@@ -56,3 +89,4 @@ def set_default_theme():
         'plotly_white' theme and our custom theme.
     '''
     # TODO : Set default theme
+    pio.templates.default = 'plotly_white+custom_template'

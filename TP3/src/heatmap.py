@@ -30,10 +30,10 @@ def get_figure(data):
                 )
     
     fig.update_layout(dragmode=False,
-                      xaxis = dict(
-      tickmode = 'linear',
-      tickangle=-45,
-      ))
+                  xaxis = dict(
+                      tickmode = 'linear',
+                      tickangle=-45,
+                 ))
     fig.update_traces(hovertemplate=hover_template.get_heatmap_hover_template())
 
     return fig

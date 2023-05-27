@@ -74,7 +74,7 @@ def create_custom_theme():
     template.data.heatmap.colorscale = THEME['colorscale']
 
     # Set x-axis tick angle
-    #template.layout.xaxis.tickangle = 90
+    #template.layout.xaxis.tickangle = -45
 
     # Set x-axis tickmode
     #template.layout.xaxis.tickmode = 'linear'

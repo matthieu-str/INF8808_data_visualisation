@@ -87,7 +87,7 @@ def restructure_df(yearly_df):
                          values="Counts",
                          index=["Arrond_Nom"],
                          columns=["Date_Plantation"],
-                         fill_value=0)  # fills empty cells with 0
+                         fill_value=0) # fills empty cells with 0
 
     return piv
 

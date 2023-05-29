@@ -24,13 +24,13 @@ def get_empty_figure():
     fig.update_layout(
         annotations=[
             dict(
-                x=2.5,
-                y=1.5,
+                x=0.5,
+                y=0.5,
                 text='No data to display. Select a cell in the heatmap for more information.',
                 showarrow=False,
                 font=dict(
                     family=THEME['font_family'],
-                    size=THEME['label_font_size'],
+                    size=8,
                     color=THEME['dark_color'] ) )])
     
     fig.update_xaxes(visible=False, showticklabels=False)
@@ -94,8 +94,6 @@ def get_figure(line_data, arrond, year):
                          title=f"Trees planted in {arrond} in {year}",
                          labels={'y':'Trees'},
                          color_discrete_sequence=['black'])
-        fig.update_layout(xaxis_tickformat='%d %b')
-        fig.update_xaxes(title='')
 
     else:
         data = line_data.sort_values(by="Date_Plantation")
@@ -103,9 +101,12 @@ def get_figure(line_data, arrond, year):
                       y=data.Counts,
                       title=f"Trees planted in {arrond} in {year}",
                       labels={'y':'Trees'})
-        fig.update_layout(xaxis_tickformat='%d %b')
-        fig.update_xaxes(title='')
-
+        fig.update_traces(line_color='black')
+    
+    fig.update_layout(xaxis = dict(title='',
+                                   tickformat='%d %b')) 
+    
     fig.update_traces(hovertemplate=hover_template.get_linechart_hover_template())
+    
 
     return fig

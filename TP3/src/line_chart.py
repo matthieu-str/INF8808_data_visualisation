@@ -30,7 +30,7 @@ def get_empty_figure():
                 showarrow=False,
                 font=dict(
                     family=THEME['font_family'],
-                    size=8,
+                    size=THEME['label_font_size'],
                     color=THEME['dark_color'] ) )])
     
     fig.update_xaxes(visible=False, showticklabels=False)
@@ -94,6 +94,7 @@ def get_figure(line_data, arrond, year):
                          title=f"Trees planted in {arrond} in {year}",
                          labels={'y':'Trees'},
                          color_discrete_sequence=['black'])
+        fig.update_layout(xaxis_tickformat='%d-%b')
 
     else:
         data = line_data.sort_values(by="Date_Plantation")
@@ -102,10 +103,7 @@ def get_figure(line_data, arrond, year):
                       title=f"Trees planted in {arrond} in {year}",
                       labels={'y':'Trees'})
         fig.update_traces(line_color='black')
-    
-    fig.update_layout(xaxis = dict(title='',
-                                   tickformat='%d %b')) 
-    
+    fig.update_xaxes(title='')
     fig.update_traces(hovertemplate=hover_template.get_linechart_hover_template())
     
 

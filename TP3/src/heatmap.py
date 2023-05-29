@@ -3,7 +3,7 @@
 '''
 import plotly.express as px
 import hover_template
-
+import plotly.graph_objects as go
 
 def get_figure(data):
     '''
@@ -23,15 +23,41 @@ def get_figure(data):
     # the layout. Also don't forget to include the hover template.
     # include hover template
     # set dragmode = False
-    
-    fig = px.imshow(data,
-                color_continuous_scale='Bluyl',
-                labels={'x': 'Year', 'y': 'Neighborhood', 'color': 'Trees'},
-                )
-    
-    fig.update_layout(dragmode=False,
-                      xaxis = dict(tickmode = 'linear')
-                      )
+
+    years = list(data.keys())
+    neighborhoods = list(data[years[0]].keys())
+    neighborhoods.reverse()
+    z_matrix = [[data[year][neighborhood] for year in years] for neighborhood in neighborhoods]
+
+
+    heatmap_trace = go.Heatmap(
+        x=years,
+        y=neighborhoods,
+        z=z_matrix,
+    )
+    fig = go.Figure(data=heatmap_trace)
+    fig.update_coloraxes(colorbar_title='Trees')
+    fig.update_layout(
+        xaxis_title='Year',
+        yaxis_title='Neighborhood',
+        xaxis=dict(
+            tickvals=years,
+            ticktext=years,
+            tickangle = -45,
+            tickmode='linear',
+        )
+    )
+
+    # fig = px.imshow(data,
+    #             color_continuous_scale='Bluyl',
+    #             labels={'x': 'Year', 'y': 'Neighborhood', 'color': 'Trees'},
+    #             )
+    #
+    # fig.update_layout(dragmode=False)
+    # #               xaxis = dict(
+    # #                   tickmode = 'linear',
+    # #                   tickangle=-45,
+    # #              ))
     fig.update_traces(hovertemplate=hover_template.get_heatmap_hover_template())
 
     return fig

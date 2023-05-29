@@ -70,16 +70,17 @@ def create_custom_theme():
     template.layout.hovermode = 'closest'
 
     # Set line chart line color
-    #template.data.line.color = THEME['line_chart_color']
+    template.layout.colorway = [THEME['line_chart_color']]
 
     # Set heatmap color scale
-    # template.data.heatmap = [go.Heatmap(colorscale = THEME['colorscale'])]
+    template.data.heatmap = [go.Heatmap(colorscale = THEME['colorscale'])]
 
     # Set x-axis tick angle
     template.layout.xaxis.tickangle = -45
 
     # Add the template to pio's templates
     pio.templates['custom_template'] = template
+
 
 
 def set_default_theme():

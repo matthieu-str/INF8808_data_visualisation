@@ -1,0 +1,14 @@
+[33m2ec29b7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{0}: merge origin/master: Fast-forward
+[33mb96e6dc[m[33m ([m[1;31morigin/play_ground[m[33m)[m HEAD@{1}: rebase -i (finish): returning to refs/heads/master
+[33mb96e6dc[m[33m ([m[1;31morigin/play_ground[m[33m)[m HEAD@{2}: rebase -i (start): checkout b96e6dcd0b06f6682bc8fc7d7bc148e25b376e6c
+[33m8fc066e[m HEAD@{3}: revert: Revert "Revert "1""
+[33m12780dc[m HEAD@{4}: revert: Revert "1"
+[33m9e5d2bd[m HEAD@{5}: rebase: checkout master
+[33m9e5d2bd[m HEAD@{6}: rebase: checkout master
+[33m9e5d2bd[m HEAD@{7}: commit (amend): 1
+[33m0b2afe3[m HEAD@{8}: commit: 1
+[33mb96e6dc[m[33m ([m[1;31morigin/play_ground[m[33m)[m HEAD@{9}: merge origin/master: Fast-forward
+[33mc030e79[m HEAD@{10}: commit: Added hover font
+[33m7e61ac1[m HEAD@{11}: pull git@github.com:xuerlee/INF8808_data_visualisation.git --allow-unrelated-histories: Merge made by the 'recursive' strategy.
+[33mb5ca7b0[m HEAD@{12}: pull git@github.com:xuerlee/INF8808_data_visualisation.git --allow-unrelated-histories: Merge made by the 'recursive' strategy.
+[33m6f79c98[m HEAD@{13}: commit (initial): inf8808

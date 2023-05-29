@@ -88,6 +88,7 @@ def get_figure(line_data, arrond, year):
     '''
     # TODO : Construct the required figure. Don't forget to include the hover template
 
+    # If there is only one data point, then the chart is a scatter plot
     if line_data.shape[0] == 1:
         fig = px.scatter(x=line_data.Date_Plantation,
                          y=line_data.Counts,
@@ -95,6 +96,7 @@ def get_figure(line_data, arrond, year):
                          labels={'y':'Trees'},
                          color_discrete_sequence=['black'])
 
+    # If there are several data points, then we plot the line chart
     else:
         data = line_data.sort_values(by="Date_Plantation")
         fig = px.line(x=data.Date_Plantation,

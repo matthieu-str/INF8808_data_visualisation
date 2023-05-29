@@ -35,4 +35,3 @@ def get_linechart_hover_template():
     hover_template = "<b><span style='font-family: Roboto Slab;'>{label}</span></b>: <span style='font-family: Roboto;'>{value}</span>"
     return hover_template.format(label="Date", value="%{x|%d %b}") + "<br>" + \
            hover_template.format(label="Trees", value="%{y}") + "<extra>""</extra>"
-

@@ -87,7 +87,7 @@ def restructure_df(yearly_df):
                          values="Counts",
                          index=["Arrond_Nom"],
                          columns=["Date_Plantation"],
-                         fill_value=0)  # fills empty cells with 0
+                         fill_value=0) # fills empty cells with 0
 
     return piv
 
@@ -113,8 +113,8 @@ def get_daily_info(dataframe, arrond, year):
     dataframe.index = pd.DatetimeIndex(dataframe.index)
     start_date = dataframe.index.min()
     end_date = dataframe.index.max()
-    idx = pd.date_range(f'{start_date}', f'{end_date}')
-    dataframe = dataframe.reindex(idx, fill_value=0)
+    idx = pd.date_range(f'{start_date}', f'{end_date}') # range of dates in which we want to visualise
+    dataframe = dataframe.reindex(idx, fill_value=0) # if no data, it means that 0 trees were planted
     dataframe.reset_index(drop=False, inplace=True)
     dataframe.rename(columns={"index": "Date_Plantation", "Arrond": "Counts"}, inplace=True)
 

@@ -103,7 +103,8 @@ def get_figure(line_data, arrond, year):
                       title=f"Trees planted in {arrond} in {year}",
                       labels={'y':'Trees'})
         fig.update_traces(line_color='black')
-
+    fig.update_xaxes(title='')
     fig.update_traces(hovertemplate=hover_template.get_linechart_hover_template())
+    
 
     return fig

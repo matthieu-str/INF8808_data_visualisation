@@ -25,15 +25,14 @@ def get_figure(data):
     # set dragmode = False
     
     fig = px.imshow(data,
-                color_continuous_scale='Bluyl',
-                labels={'x': 'Year', 'y': 'Neighborhood', 'color': 'Trees'},
-                )
+                    color_continuous_scale='Bluyl',
+                    labels={'x': 'Year', 'y': 'Neighborhood', 'color': 'Trees'}
+                    )
     
-    fig.update_layout(dragmode=False)
-    #               xaxis = dict(
-    #                   tickmode = 'linear',
-    #                   tickangle=-45,
-    #              ))
+    fig.update_layout(dragmode=False,
+                      xaxis = dict(tickmode = 'linear')
+                      )
+    
     fig.update_traces(hovertemplate=hover_template.get_heatmap_hover_template())
 
     return fig

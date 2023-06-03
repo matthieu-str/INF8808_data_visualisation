@@ -1,0 +1,37 @@
+Groupe : 14
+
+*****
+
+** Data preprocessing ** 
+
+Points : [ 6/6]
+Commentaires : 
+
+** Bar Chart ** 
+
+Points : [ 7/7]
+Commentaires :  
+
+** Theme ** 
+
+Points : [ 2/2]
+Commentaires :  
+
+** Tooltip ** 
+
+Points [ 1.5/2]
+Commentaires : 0.5	Title font is not applied correctly
+
+** Display mode toggle ** 
+
+Points [ 2/2]
+Commentaires : 
+
+** Overall quality and clarity of the submission ** 
+
+Points : [ 1/1]
+Commentaires :  
+
+*****
+
+TOTAL : [19.5/20]

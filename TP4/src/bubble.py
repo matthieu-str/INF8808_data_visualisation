@@ -50,7 +50,7 @@ def update_animation_hover_template(fig):
     '''
 
     # TODO : Set the hover template
-    return None
+    return fig
 
 
 def update_animation_menu(fig):
@@ -64,7 +64,7 @@ def update_animation_menu(fig):
             The updated figure
     '''
     # TODO : Update animation menu
-    return None
+    return fig
 
 
 def update_axes_labels(fig):
@@ -78,7 +78,7 @@ def update_axes_labels(fig):
     '''
     # TODO : Update labels
     fig.update_layout(xaxis_title="GDP per capita ($ USD)")
-    fig.update_layout(xaxis_title="CO2 emissions per capita (metric tonnes)")
+    fig.update_layout(yaxis_title="CO2 emissions per capita (metric tonnes)")
     return fig
 
 

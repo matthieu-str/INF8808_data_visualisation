@@ -77,8 +77,8 @@ def update_axes_labels(fig):
             The updated figure
     '''
     # TODO : Update labels
-    fig.update_xaxes(title_text="GDP per capita ($ USD)")
-    fig.update_yaxes(title_text="CO2 emissions per capita (metric tonnes)")
+    fig.update_layout(xaxis_title="GDP per capita ($ USD)")
+    fig.update_layout(xaxis_title="CO2 emissions per capita (metric tonnes)")
     return fig
 
 

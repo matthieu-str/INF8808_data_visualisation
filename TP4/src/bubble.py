@@ -3,7 +3,7 @@
 '''
 
 import plotly.express as px
-
+import plotly.graph_objects as go
 import hover_template
 
 
@@ -27,13 +27,14 @@ def get_plot(my_df, gdp_range, co2_range):
             The generated figure
     '''
     # TODO : Define figure with animation
-    fig = px.scatter(my_df, x="GDP", y="CO2", hover_name="Country Name", size="Population",
-                     animation_frame="Year", # animation between 2000 and 2015
-                     log_x=True, log_y=True, # logarithmic x and y axes
-                     color="Continent", color_discrete_sequence=px.colors.qualitative.Set1, # colors
-                     range_x=gdp_range, range_y=co2_range, # x and y axes ranges
+    fig = px.scatter(my_df, x="GDP", y="CO2", custom_data=["Country Name", "Population"], hover_name="Country Name", size="Population",
+                     animation_frame="Year",  # animation between 2000 and 2015
+                     log_x=True, log_y=True,  # logarithmic x and y axes
+                     color="Continent", color_discrete_sequence=px.colors.qualitative.Set1,  # colors
+                     range_x=gdp_range, range_y=co2_range,  # x and y axes ranges
                      size_max=30)
     fig.update_traces(marker=dict(sizemin=6))
+
     return fig
 
 
@@ -48,6 +49,10 @@ def update_animation_hover_template(fig):
         Returns:
             The updated figure
     '''
+    fig.update_traces(hovertemplate=hover_template.get_bubble_hover_template())
+    for frame in fig.frames:
+        for trace in frame.data:
+            trace.hovertemplate = hover_template.get_bubble_hover_template()
 
     # TODO : Set the hover template
     return fig
@@ -64,6 +69,27 @@ def update_animation_menu(fig):
             The updated figure
     '''
     # TODO : Update animation menu
+    fig["layout"]["sliders"][0]["currentvalue"]["prefix"] = "Data for year: "
+    fig["layout"].pop("updatemenus")
+    fig.update_layout(
+        updatemenus=[
+            go.layout.Updatemenu(
+                buttons=[
+                    go.layout.updatemenu.Button(
+                        label="Animate",
+                        method="animate",
+                        args=[None, {"frame": {"duration": 500, "redraw": True}, "fromcurrent": True}]
+                    )
+                ],
+                type="buttons",
+                showactive=False,
+                direction="left",
+                x=0.08,
+                y=-0.18
+            )
+        ]
+    )
+
     return fig
 
 

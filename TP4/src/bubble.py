@@ -93,7 +93,8 @@ def update_template(fig):
             The updated figure
     '''
     # TODO : Update template
-    return None
+    fig.update_layout(template="simple_white")
+    return fig
 
 
 def update_legend(fig):

@@ -5,8 +5,9 @@
 
 import plotly.graph_objects as go
 import plotly.express as px
-
 import hover_template as hover
+import pandas as pd
+
 
 
 def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
@@ -31,11 +32,33 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
     '''
     # TODO : Draw the map base
 
-    # DOES NOT WORK
-    fig.add_trace(go.Choropleth(geojson=montreal_data,
-                                locations=locations,
-                                z=z_vals,
-                                colorscale=colorscale))
+
+    trace = px.choropleth_mapbox(
+        locations=locations,
+        geojson=montreal_data,
+        color=z_vals,
+        color_continuous_scale=colorscale,
+        # color_discrete_map={1: colorscale[0]},
+        # mapbox_style='carto-positron',
+        featureidkey='properties.NOM',
+        zoom=10,
+        center={'lat': 45.5, 'lon': -73.6},
+        opacity=0.2,
+    ).update_traces(showlegend=False, mapbox_style='carto-positron')
+    fig.add_trace(trace.data[0])
+
+    # fig = px.choropleth_mapbox(
+    #     locations=locations,
+    #     geojson=montreal_data,
+    #     color=z_vals,
+    #     color_continuous_scale=colorscale,
+    #     featureidkey='properties.NOM',
+    #     zoom=10,
+    #     center={'lat': 45.5, 'lon': -73.6},
+    #     opacity=0.2,
+    # ).update_traces(showlegend=False)
+    #
+    # # fig.update_layout(mapbox_style='carto-positron')
 
     return fig
 
@@ -55,8 +78,11 @@ def add_scatter_traces(fig, street_df):
 
     '''
     # TODO : Add the scatter markers to the map base
-    fig.add_trace(go.Scattergeo(lat=street_df["properties.LATITUDE"],
-                                lon=street_df["properties.LONGITUDE"],
-                                mode="markers",
-                                marker=dict(size=20)))
+    street_df['lon'] = street_df['geometry.coordinates'].apply(lambda x: x[0])
+    street_df['lat'] = street_df['geometry.coordinates'].apply(lambda x: x[1])
+    trace = px.scatter_mapbox(street_df, lon='lon', lat='lat',
+                            zoom=10,
+                            color="properties.TYPE_SITE_INTERVENTION").update_traces(marker=dict(size=20))
+    for t in trace.data:
+        fig.add_trace(t)
     return fig

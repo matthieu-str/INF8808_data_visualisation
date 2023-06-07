@@ -25,8 +25,8 @@ def to_df(data):
             my_df: The corresponding dataframe
     '''
     # TODO : Convert JSON formatted data to dataframe
-    df = pd.json_normalize(data, record_path="features")
-    return df
+    my_df = pd.json_normalize(data, record_path="features")
+    return my_df
 
 
 def update_titles(my_df):

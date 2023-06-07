@@ -44,7 +44,7 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
         zoom=10,
         center={'lat': 45.5, 'lon': -73.6},
         opacity=0.2,
-    ).update_traces(showlegend=False, mapbox_style='carto-positron')
+    ).update_traces(showlegend=False)
     fig.add_trace(trace.data[0])
 
     # fig = px.choropleth_mapbox(

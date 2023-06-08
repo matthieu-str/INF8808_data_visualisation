@@ -32,20 +32,17 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
     '''
     # TODO : Draw the map base
 
-
     trace = px.choropleth_mapbox(
         locations=locations,
         geojson=montreal_data,
         color=z_vals,
         color_continuous_scale=colorscale,
-        # color_discrete_map={1: colorscale[0]},
-        # mapbox_style='carto-positron',
         featureidkey='properties.NOM',
-        zoom=10,
-        center={'lat': 45.5, 'lon': -73.6},
-        opacity=0.2,
-    ).update_traces(showlegend=False)
+        mapbox_style='carto-positron',
+        color_discrete_map={1: colorscale[0]},
+        opacity=0.2).update_traces(showlegend=False, )#hovertemplate=hover.map_base_hover_template()
     fig.add_trace(trace.data[0])
+    fig.update_layout(coloraxis_showscale=False)
 
     # fig = px.choropleth_mapbox(
     #     locations=locations,
@@ -78,11 +75,25 @@ def add_scatter_traces(fig, street_df):
 
     '''
     # TODO : Add the scatter markers to the map base
+    # TODO : Add the scatter markers to the map base
     street_df['lon'] = street_df['geometry.coordinates'].apply(lambda x: x[0])
     street_df['lat'] = street_df['geometry.coordinates'].apply(lambda x: x[1])
     trace = px.scatter_mapbox(street_df, lon='lon', lat='lat',
-                            zoom=10,
-                            color="properties.TYPE_SITE_INTERVENTION").update_traces(marker=dict(size=20))
+                              zoom=-10,
+                              color="properties.TYPE_SITE_INTERVENTION",
+                              color_discrete_map={},
+                              ).update_traces(marker=dict(size=20),
+                              ) #hovertemplate=hover.map_marker_hover_template(name)
+
+    fig.update_layout(
+        legend=dict(
+            bgcolor='rgba(0, 0, 0, 0)', 
+            itemsizing='constant'
+        ),
+        hovermode='closest'
+    )
+
     for t in trace.data:
         fig.add_trace(t)
+    fig.update_traces()    
     return fig

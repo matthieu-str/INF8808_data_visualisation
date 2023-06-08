@@ -40,7 +40,8 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
         featureidkey='properties.NOM',
         mapbox_style='carto-positron',
         color_discrete_map={1: colorscale[0]},
-        opacity=0.2).update_traces(showlegend=False, )#hovertemplate=hover.map_base_hover_template()
+        opacity=0.2).update_traces(showlegend=False,
+                                   hovertemplate=hover.map_base_hover_template() )
     fig.add_trace(trace.data[0])
     fig.update_layout(coloraxis_showscale=False)
 

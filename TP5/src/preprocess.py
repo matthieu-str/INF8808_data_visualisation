@@ -41,9 +41,8 @@ def update_titles(my_df):
                 made according to the 'TITLES' dictionary
     '''
     # TODO : Update the titles
-    my_df.replace({"properties.TYPE_SITE_INTERVENTION": TITLES}, inplace=True)
+    my_df['properties.TYPE_SITE_INTERVENTION'] = my_df['properties.TYPE_SITE_INTERVENTION'].map(TITLES)
     return my_df
-
 
 def sort_df(my_df):
     '''

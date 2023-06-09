@@ -38,8 +38,7 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
         color=z_vals,
         color_continuous_scale=colorscale,
         featureidkey='properties.NOM',
-        mapbox_style='carto-positron',
-        color_discrete_map={1: colorscale[0]},
+        # color_discrete_map={1: colorscale[0]},
         opacity=0.2).update_traces(showlegend=False,
                                    hovertemplate=hover.map_base_hover_template() )
     fig.add_trace(trace.data[0])
@@ -79,12 +78,15 @@ def add_scatter_traces(fig, street_df):
     # TODO : Add the scatter markers to the map base
     street_df['lon'] = street_df['geometry.coordinates'].apply(lambda x: x[0])
     street_df['lat'] = street_df['geometry.coordinates'].apply(lambda x: x[1])
+    name = street_df["properties.TYPE_SITE_INTERVENTION"]
+    hovertemplates = name.apply(hover.map_marker_hover_template)
+
     trace = px.scatter_mapbox(street_df, lon='lon', lat='lat',
                               zoom=-10,
                               color="properties.TYPE_SITE_INTERVENTION",
                               color_discrete_map={},
                               ).update_traces(marker=dict(size=20),
-                              ) #hovertemplate=hover.map_marker_hover_template(name)
+                                hovertemplate=hovertemplates)
 
     fig.update_layout(
         legend=dict(

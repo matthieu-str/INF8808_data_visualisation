@@ -29,5 +29,5 @@ def map_marker_hover_template(name):
             The hover template.
     '''
     # TODO : Generate the hover template
-    hover_template = "<b><span style='font-family: Oswald'>%s</span></b>" % name
+    hover_template = "<b><span style='font-family: Oswald'>%{fullData.name}</span></b> <extra></extra>"
     return hover_template

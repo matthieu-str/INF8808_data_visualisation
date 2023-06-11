@@ -40,22 +40,10 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
         featureidkey='properties.NOM',
         # color_discrete_map={1: colorscale[0]},
         opacity=0.2).update_traces(showlegend=False,
-                                   hovertemplate=hover.map_base_hover_template() )
+        hovertemplate=hover.map_base_hover_template())
+    
     fig.add_trace(trace.data[0])
     fig.update_layout(coloraxis_showscale=False)
-
-    # fig = px.choropleth_mapbox(
-    #     locations=locations,
-    #     geojson=montreal_data,
-    #     color=z_vals,
-    #     color_continuous_scale=colorscale,
-    #     featureidkey='properties.NOM',
-    #     zoom=10,
-    #     center={'lat': 45.5, 'lon': -73.6},
-    #     opacity=0.2,
-    # ).update_traces(showlegend=False)
-    #
-    # # fig.update_layout(mapbox_style='carto-positron')
 
     return fig
 
@@ -82,21 +70,22 @@ def add_scatter_traces(fig, street_df):
     hovertemplates = name.apply(hover.map_marker_hover_template)
 
     trace = px.scatter_mapbox(street_df, lon='lon', lat='lat',
-                              zoom=-10,
+                              zoom=10,
                               color="properties.TYPE_SITE_INTERVENTION",
                               color_discrete_map={},
+                              custom_data = street_df
                               ).update_traces(marker=dict(size=20),
                                 hovertemplate=hovertemplates)
 
-    fig.update_layout(
-        legend=dict(
-            bgcolor='rgba(0, 0, 0, 0)', 
-            itemsizing='constant'
-        ),
-        hovermode='closest'
-    )
-
     for t in trace.data:
         fig.add_trace(t)
-    fig.update_traces()    
+    
+    fig.update_traces()
+    fig.update_layout(autosize=True,
+                      legend=dict(bgcolor='rgba(0, 0, 0, 0)', 
+                                  itemsizing='constant'
+                                  ),
+                      hovermode='closest'
+                      )
     return fig
+

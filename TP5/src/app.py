@@ -123,6 +123,5 @@ def display(clicks_fig, figure, title, mode, theme, style): # noqa : E501 pylint
                                            title,
                                            mode,
                                            theme,
-                                           style,
-                                           street_df)
+                                           style)
     return None, None, None, None

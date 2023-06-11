@@ -31,20 +31,25 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
 
     '''
     # TODO : Draw the map base
-
-    trace = px.choropleth_mapbox(
-        locations=locations,
-        geojson=montreal_data,
-        color=z_vals,
-        color_continuous_scale=colorscale,
-        featureidkey='properties.NOM',
-        # color_discrete_map={1: colorscale[0]},
-        opacity=0.2).update_traces(showlegend=False,
-        hovertemplate=hover.map_base_hover_template())
+    trace = px.choropleth_mapbox(locations=locations,
+                                 geojson=montreal_data,
+                                 color=z_vals,
+                                 color_continuous_scale=colorscale,
+                                 featureidkey='properties.NOM',
+                                 mapbox_style='carto-positron',
+                                 color_discrete_map={1: colorscale[0]},
+                                 opacity=0.2
+                                 )
+    
+    trace.update_traces(showlegend=False,
+                        hovertemplate=hover.map_base_hover_template()
+                        )
     
     fig.add_trace(trace.data[0])
-    fig.update_layout(coloraxis_showscale=False)
-
+    fig.update_layout(coloraxis= dict(colorscale='Greys'),
+                      coloraxis_showscale=False,
+                      autosize=True
+                      )
     return fig
 
 
@@ -63,7 +68,6 @@ def add_scatter_traces(fig, street_df):
 
     '''
     # TODO : Add the scatter markers to the map base
-    # TODO : Add the scatter markers to the map base
     street_df['lon'] = street_df['geometry.coordinates'].apply(lambda x: x[0])
     street_df['lat'] = street_df['geometry.coordinates'].apply(lambda x: x[1])
     name = street_df["properties.TYPE_SITE_INTERVENTION"]
@@ -74,13 +78,15 @@ def add_scatter_traces(fig, street_df):
                               color="properties.TYPE_SITE_INTERVENTION",
                               color_discrete_map={},
                               custom_data = street_df
-                              ).update_traces(marker=dict(size=20),
-                                hovertemplate=hovertemplates)
+                              )
+    
+    trace.update_traces(marker=dict(size=20),
+                        hovertemplate=hovertemplates)
 
     for t in trace.data:
         fig.add_trace(t)
-    
     fig.update_traces()
+    
     fig.update_layout(autosize=True,
                       legend=dict(bgcolor='rgba(0, 0, 0, 0)', 
                                   itemsizing='constant'

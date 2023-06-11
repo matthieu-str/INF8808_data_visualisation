@@ -48,7 +48,7 @@ def map_base_clicked(title, mode, theme, style):
     return title, mode, theme, style
 
 
-def map_marker_clicked(figure, curve, point, title, mode, theme, style, street_df): # noqa : E501 pylint: disable=unused-argument too-many-arguments line-too-long
+def map_marker_clicked(figure, curve, point, title, mode, theme, style): # noqa : E501 pylint: disable=unused-argument too-many-arguments line-too-long
     '''
         Deals with the case where a marker is clicked
 
@@ -67,36 +67,35 @@ def map_marker_clicked(figure, curve, point, title, mode, theme, style, street_d
             style: The updated display style for the panel
     '''
     # TODO : Handle clicks on the markers
-    # Get the marker information from street_df
-    marker_info = street_df.iloc[point]
-
+   
+    # Get the marker information 
+    marker_info = figure['data'][curve]['customdata'][point]
+    
     # Extraction of the relevant data from the marker_info
-    name = marker_info['properties.NOM_PROJET']
-    mode = marker_info['properties.MODE_IMPLANTATION']
-    theme = marker_info['properties.OBJECTIF_THEMATIQUE']
+    name = marker_info[4]
+    mode = marker_info[16]
+    theme = marker_info[23]
+    
 
     # Update the panel with the marker information
     title = html.Div(html.H3(name), id='marker-title', 
-                     style={'fontSize': '18px', 'color': 'green', 'marginBottom': '5px'}
+                     style={'color': figure['data'][curve]['marker']['color']}
                      )  
-    mode = html.Div(html.P(f"{mode}"), id='mode', 
-                    style={'fontSize': '14px', 'marginBottom': '5px'}
-                    )  
+    mode = html.Div(html.P(f"{mode}"), id='mode')  
 
     # Create a list of themes 
     if theme is not None:
         theme_list = [html.Li(theme_item) for theme_item in theme.split('\n')]
+        thematique = 'Thématique:'
     else:
         theme_list = []
-    theme = html.Div([html.P('Thématique:', 
-                             style={'fontWeight': 'normal', 'marginBottom': '5px'}),  
-                      html.Ul(theme_list)
-                      ], 
-                     id='theme', 
-                     style={'fontSize': '12px', 'lineHeight': '1.2'})  
-
+        thematique = 'Thématique: Aucune'
+        
+    theme = html.Div([html.P(thematique, ),html.Ul(theme_list)], id='theme') 
+ 
     # Display the new panel
     style['visibility'] = 'visible'
     style['height'] = 'min-content'
+    style['background-color'] = 'transparent'
 
     return title, mode, theme, style

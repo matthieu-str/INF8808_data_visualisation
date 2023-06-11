@@ -71,31 +71,42 @@ def map_marker_clicked(figure, curve, point, title, mode, theme, style): # noqa 
     # Get the marker information 
     marker_info = figure['data'][curve]['customdata'][point]
     
-    # Extraction of the relevant data from the marker_info
-    name = marker_info[4]
-    mode = marker_info[16]
-    theme = marker_info[23]
+    # Extraction of the relevant data from marker_info
+    name = marker_info[4]   #NOM_PROJET
+    mode = marker_info[16]  #MODE_IMPLANTATION
+    theme = marker_info[23] #OBJECTIF_THEMATIQUE
     
 
-    # Update the panel with the marker information
+    # Update the panel with the extracted data
     title = html.Div(html.H3(name), id='marker-title', 
-                     style={'color': figure['data'][curve]['marker']['color']}
+                     style={'color': figure['data'][curve]['marker']['color'],
+                            'padding': '0',
+                            'marginTop': '-30px'
+                            }
                      )  
-    mode = html.Div(html.P(f"{mode}"), id='mode')  
+   
+    mode = html.Div(html.P(f"{mode}"), 
+                    id='mode', 
+                    style={'padding': '0','marginTop': '-20px'}
+                    )  
 
-    # Create a list of themes 
+    # Create a list of thématiques 
     if theme is not None:
         theme_list = [html.Li(theme_item) for theme_item in theme.split('\n')]
         thematique = 'Thématique:'
     else:
         theme_list = []
-        thematique = 'Thématique: Aucune'
+        thematique = 'Thématique: Aucune' # Displayed when there is no thématique
         
-    theme = html.Div([html.P(thematique, ),html.Ul(theme_list)], id='theme') 
+    theme = html.Div([html.P(thematique, ),html.Ul(theme_list)], 
+                     id='theme',
+                     style={'padding': '0','marginTop': '-20px'}
+                     ) 
  
     # Display the new panel
     style['visibility'] = 'visible'
     style['height'] = 'min-content'
     style['background-color'] = 'transparent'
-
+    style['display'] = 'block'
+    
     return title, mode, theme, style
